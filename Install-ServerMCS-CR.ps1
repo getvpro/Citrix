@@ -4,6 +4,7 @@
 #Requires -RunAsAdministrator
 
 # March 5, 2022: Owen Reynolds, re-added support for redezvous protocol v2
+# April 20, 2022: Re-added support for Citrix universal printer service
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
@@ -204,7 +205,7 @@ $appProcesses = @("BrokerAgent", "picaSessionAgent")
 $appServices = @("CitrixTelemetryService")
 # https://docs.citrix.com/en-us/citrix-virtual-apps-desktops-service/install-configure/install-command.html
 # https://docs.citrix.com/en-us/citrix-virtual-apps-desktops/install-configure/install-vdas-sccm.html
-$appInstallParameters = '/noreboot /quiet /enable_remote_assistance /disableexperiencemetrics /remove_appdisk_ack /remove_pvd_ack /virtualmachine /noresume /enable_real_time_transport /enable_hdx_ports /enable_hdx_udp_ports /components vda /mastermcsimage /includeadditional "Machine Identity Service","Citrix Profile Management","Citrix Profile Management WMI Plugin","Citrix Telemetry Service","Citrix MCS IODriver","Citrix Rendezvous V2" /exclude "Citrix Universal Print Client","Citrix Personalization for App-V - VDA","Citrix Supportability Tools","Citrix Files for Windows","Citrix Files for Outlook","User personalization layer","Citrix WEM Agent","Citrix VDA Upgrade Agent"'
+$appInstallParameters = '/noreboot /quiet /enable_remote_assistance /disableexperiencemetrics /remove_appdisk_ack /remove_pvd_ack /virtualmachine /noresume /enable_real_time_transport /enable_hdx_ports /enable_hdx_udp_ports /components vda /mastermcsimage /includeadditional "Machine Identity Service","Citrix Profile Management","Citrix Profile Management WMI Plugin","Citrix Telemetry Service","Citrix MCS IODriver","Citrix Rendezvous V2","Citrix Universal Print Client" /exclude "Citrix Personalization for App-V - VDA","Citrix Supportability Tools","Citrix Files for Windows","Citrix Files for Outlook","User personalization layer","Citrix WEM Agent","Citrix VDA Upgrade Agent"'
 $Evergreen = Get-EvergreenApp -Name CitrixVirtualAppsDesktopsFeed | Where-Object {$_.Title -like "Citrix Virtual Apps and Desktops 7 21*, All Editions"} | Sort-Object Version -Descending | Select-Object -First 1
 $appVersion = $Evergreen.Version
 $appSetup = "VDAServerSetup_$appVersion.exe"
